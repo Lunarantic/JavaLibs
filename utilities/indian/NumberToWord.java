@@ -1,4 +1,4 @@
-package indian.utilities;
+package utilities.indian;
 
 public class NumberToWord {
     private static final String[] specialNames = { "", " Thousand", " Lakhs", " Crore" };
