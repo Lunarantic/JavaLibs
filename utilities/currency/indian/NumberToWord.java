@@ -83,7 +83,7 @@ public class NumberToWord {
             num += convert(temp) + " Paise";
         }
 
-        return "Rupees" + num + " only";
+        return "Rupees " + num + " only";
     }
 
     public String convert(String number) {
