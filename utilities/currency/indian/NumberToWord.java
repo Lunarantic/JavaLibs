@@ -1,4 +1,4 @@
-package utilities.indian;
+package utilities.currency.indian;
 
 public class NumberToWord {
     private static final String[] specialNames = { "", " Thousand", " Lakhs", " Crore" };
@@ -83,7 +83,7 @@ public class NumberToWord {
             num += convert(temp) + " Paise";
         }
 
-        return num + " only";
+        return "Rupees" + num + " only";
     }
 
     public String convert(String number) {
