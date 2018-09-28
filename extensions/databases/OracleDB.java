@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class OracleDB {
 
+    // checking if the database connection is null or not 
     public static void close(Connection connection, Statement ps, ResultSet rs) throws SQLException {
         if (null != connection)
             connection.close();
@@ -20,7 +21,8 @@ public class OracleDB {
             rs.close();
     }
 
-    public static Map<String, Map<String, Object>> rsToMap(final ResultSet rs, String rowKey) throws SQLException {
+   // converting result Set obtained from database to Map
+    public static Map<String, Map<String, Object>> resultSetToMap(final ResultSet rs, String rowKey) throws SQLException {
 
         int iFetchSize = 5000;
         if (rs.getFetchSize() < iFetchSize) {
