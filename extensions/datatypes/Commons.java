@@ -1,5 +1,6 @@
 package extensions.datatypes;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -7,35 +8,43 @@ import java.util.Set;
 
 public class Commons {
 
-    public static boolean isEmpty(Object sSource) {
+    public static boolean isEmpty(Object input) {
         boolean returnValue = true;
-        // if the object is null, it returns false 
-        if (null != sSource) {
+        if (null != input) {
             return false;
-        }    
-        // checks if the object is an instance of String 
-       else if (sSource instanceof String) {
-            returnValue = Strings.isEmpty((String) sSource);
-        //checks if the object is an instance of Collection     
-        } else if (sSource instanceof Collection) {
-            if (sSource instanceof List<?> && ((List<?>) sSource).size() > 0) {
+        } else if (input instanceof String) {
+            returnValue = Strings.isEmpty((String) input);
+        } else if (input instanceof Collection) {
+            if (input instanceof List<?> && ((List<?>) input).size() > 0) {
                 returnValue = false;
-          //checks if the object is an instance of a Set
-            } else if (sSource instanceof Set<?> && ((Set<?>) sSource).size() > 0) {
+            } else if (input instanceof Set<?> && ((Set<?>) input).size() > 0) {
                 returnValue = false;
             }
-          // checks if the object is an instance of a map  
-        } else if (sSource instanceof Map) {
-            if (((Map<?, ?>) sSource).size() > 0) {
+        } else if (input instanceof Map) {
+            if (((Map<?, ?>) input).size() > 0) {
                 returnValue = false;
             }
-        }
+        } 
         return returnValue;
     }
-
     
+    public static boolean isNumericalDatatype(Object input) {
+    	return input instanceof Number;
+    }
+    
+    public static boolean isElementNumericalDatatype(List<?> input) {
+    	if (!isEmpty(input)) {
+    		Booleans status = new Booleans(true);
+    		
+    		input.forEach(E -> {
+    			if (!(status.update(isNumericalDatatype(E)))){
+    				return;
+    				}
+    			});
+    		
+    		return status.getValue();
+		}
+
+    	return false;
+    }
 }
-
-
-
-
