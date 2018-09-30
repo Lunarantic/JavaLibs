@@ -34,15 +34,7 @@ public class Commons {
     
     public static boolean isElementNumericalDatatype(List<?> input) {
     	if (!isEmpty(input)) {
-    		Booleans status = new Booleans(true);
-    		
-    		input.forEach(E -> {
-    			if (!(status.update(isNumericalDatatype(E)))){
-    				return;
-    				}
-    			});
-    		
-    		return status.getValue();
+    		return !input.stream().anyMatch(E -> !isNumericalDatatype(E));
 		}
 
     	return false;
