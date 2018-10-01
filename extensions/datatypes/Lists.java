@@ -1,5 +1,6 @@
 package extensions.datatypes;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,5 +25,23 @@ public class Lists {
             }
         }
         return new String[] { "" };
+    }
+    
+    public static String getSum(List<?> list) {
+		if (Commons.isElementNumericalDatatype(list)) {
+			BigDecimal sum = BigDecimal.ZERO;
+			list.forEach(E -> {
+				sum.add(new BigDecimal(((Number)E).doubleValue()));
+			});
+			return sum.toString();
+		} else {
+			StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+			System.err.println(stackTraceElements[1].getClassName() + "."+ stackTraceElements[1].getMethodName()
+					+ "() :: Should contain all elements Numerical");
+			for (int i = 2; i < stackTraceElements.length; i++ )
+				System.err.println(stackTraceElements[i].toString());
+		}
+    	
+    	return null;
     }
 }
