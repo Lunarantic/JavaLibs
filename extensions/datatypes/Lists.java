@@ -44,4 +44,31 @@ public class Lists {
     	
     	return null;
     }
+	
+	/**
+	 This function returns the mean when a list is passed
+        **/
+	public static String getMean(List<?> list) {
+		if(Commons.isElementNumericalDatatype(list)) {
+			
+		     BigDecimal mean = BigDecimal.ZERO;
+                     BigDecimal sum = new BigDecimal(getSum(list));
+                     BigDecimal len = new BigDecimal(list.size());
+    	             mean = sum.divide(len);
+    		        
+		       return mean.toString(); 
+			
+		} else {
+			StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+			System.err.println(stackTraceElements[1].getClassName() + "."+ stackTraceElements[1].getMethodName()
+					+ "() :: Should contain all elements Numerical");
+			for (int i = 2; i < stackTraceElements.length; i++ )
+				System.err.println(stackTraceElements[i].toString());
+		}
+		
+            return null; 
+		
+    }
+    
+	
 }
