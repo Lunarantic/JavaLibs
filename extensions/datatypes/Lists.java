@@ -26,7 +26,10 @@ public class Lists {
         }
         return new String[] { "" };
     }
-    
+	
+    /**
+	 This function returns the sum when a list is passed
+     **/
     public static String getSum(List<?> list) {
 		if (Commons.isElementNumericalDatatype(list)) {
 			BigDecimal sum = BigDecimal.ZERO;
