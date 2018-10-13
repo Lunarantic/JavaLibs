@@ -9,23 +9,20 @@ import java.util.Set;
 public class Commons {
 
     public static boolean isEmpty(Object input) {
-        boolean returnValue = true;
-        if (null != input) {
-            return false;
+        if (null == input) {
+            return true;
         } else if (input instanceof String) {
-            returnValue = Strings.isEmpty((String) input);
+            return Strings.isEmpty((String) input);
         } else if (input instanceof Collection) {
-            if (input instanceof List<?> && ((List<?>) input).size() > 0) {
-                returnValue = false;
-            } else if (input instanceof Set<?> && ((Set<?>) input).size() > 0) {
-                returnValue = false;
+            if (input instanceof List<?> && ((List<?>) input).size() == 0) {
+                returnValue = true;
+            } else if (input instanceof Set<?> && ((Set<?>) input).size() == 0) {
+                returnValue = true;
             }
-        } else if (input instanceof Map) {
-            if (((Map<?, ?>) input).size() > 0) {
-                returnValue = false;
-            }
+        } else if (input instanceof Map<> && ((Map<?, ?>) input).size() == 0) {
+            returnValue = true;
         } 
-        return returnValue;
+        return false;
     }
     
     public static boolean isNumericalDatatype(Object input) {
