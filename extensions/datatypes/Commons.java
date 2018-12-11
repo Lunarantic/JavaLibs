@@ -15,12 +15,12 @@ public class Commons {
             return Strings.isEmpty((String) input);
         } else if (input instanceof Collection) {
             if (input instanceof List<?> && ((List<?>) input).size() == 0) {
-                returnValue = true;
+                return true;
             } else if (input instanceof Set<?> && ((Set<?>) input).size() == 0) {
-                returnValue = true;
+                return true;
             }
         } else if (input instanceof Map<> && ((Map<?, ?>) input).size() == 0) {
-            returnValue = true;
+            return true;
         } 
         return false;
     }
