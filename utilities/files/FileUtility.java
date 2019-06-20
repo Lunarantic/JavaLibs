@@ -1,6 +1,8 @@
 package utilities.files;
 
 import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class FileUtility {
 
@@ -89,4 +91,68 @@ public class FileUtility {
             }
         }
     }
+    
+    public static List<String> readFileLines(InputStream inputStream) throws IOException {
+		List<String> lines = new LinkedList<>();
+		StringBuilder stringBuilder = new StringBuilder();
+		int ch;
+		try {
+			while ((ch = inputStream.read()) != -1) {
+				if (ch == '\n') {
+					lines.add(stringBuilder.toString());
+					stringBuilder = new StringBuilder();
+				} else {
+					stringBuilder.append((char) ch);
+				}
+			}
+		} finally {
+			close(inputStream);
+		}
+		return lines;
+	}
+    
+    public static List<String> readFileLines(File file) throws IOException {
+        return readFileLines(new FileInputStream(file));
+    }
+
+	public static List<String> readFileLines(String fileName) throws IOException {
+	    return readFileLines(new FileInputStream(fileName));
+	}
+	
+	public static Integer[][] readNumberInLines(InputStream inputStream) throws IOException {
+		List<Integer[]> lines = new LinkedList<>();
+		StringBuilder stringBuilder = new StringBuilder();
+		String[] line;
+		Integer[] n;
+		int ch;
+		try {
+			while ((ch = inputStream.read()) != -1) {
+				if (ch == '\n') {
+					line = stringBuilder.toString().trim().split("\\s*(=>|,|\\s)\\s*");
+					n = new Integer[line.length];
+					for (int i = 0; i < line.length; ++i) {
+						n[i] = Integer.parseInt(line[i]);
+					}
+					lines.add(n);
+					stringBuilder = new StringBuilder();
+				} else {
+					stringBuilder.append((char) ch);
+				}
+			}
+		} finally {
+			close(inputStream);
+		}
+		
+		Integer[][] res = {};
+		
+		return lines.toArray(res);
+	}
+	
+    public static Integer[][] readNumberInLines(File file) throws IOException {
+        return readNumberInLines(new FileInputStream(file));
+    }
+
+	public static Integer[][] readNumberInLines(String fileName) throws IOException {
+	    return readNumberInLines(new FileInputStream(fileName));
+	}
 }
